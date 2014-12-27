@@ -33,7 +33,7 @@ public class Chart {
         collection.addSeries(seriesY1);
         collection.addSeries(seriesY2);
         
-        chart = ChartFactory.createXYLineChart("sieæ neuronowa", "", "", collection);
+        chart = ChartFactory.createXYLineChart("siec neuronowa", "", "", collection);
         panel = new Panel(this, chart);
         
         XYPlot plot = (XYPlot) chart.getPlot();
@@ -54,7 +54,7 @@ public class Chart {
 	}
 	
 	/**
-	 * Czyœci obecny bufor punktów i ³aduje nowe dla obydwóch lini.
+	 * Czycci obecny bufor punktów i laduje nowe dla obydwoch lini.
 	 * @param points1
 	 * @param points2
 	 */
