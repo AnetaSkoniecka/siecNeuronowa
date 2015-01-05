@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 
+import network.Network;
 import view.Chart;
 import view.Window;
 
@@ -12,7 +13,8 @@ public class SiecNeuronowa {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		final Chart chart = new Chart();
+		Network network = new Network();
+		final Chart chart = new Chart(network);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

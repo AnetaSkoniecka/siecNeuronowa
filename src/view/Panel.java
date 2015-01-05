@@ -16,6 +16,8 @@ public class Panel extends ChartPanel {
 	ChartPanel panel;
 	Boolean isLeftClicked = false;
 	double tempX = 0;
+	double tempY1 = 0;
+	double tempY2 = 0;
 	
 	public Panel(Chart parent, JFreeChart chart) {
 		super(chart);
@@ -23,6 +25,7 @@ public class Panel extends ChartPanel {
 		this.parent = parent;
 		this.panel = this;
 		this.setPopupMenu(null);
+		this.setMouseZoomable(false);
 		addListener();	
 	}
 	
@@ -41,7 +44,7 @@ public class Panel extends ChartPanel {
 				double chartY = plot.getRangeAxis().java2DToValue(p.getY(), plotArea, plot.getRangeAxisEdge());
 				double x = Math.floor(chartX * 100) / 100;
 				double y = Math.floor(chartY * 100) / 100;
-				System.out.println(x + " " + y);		
+				//System.out.println(x + " " + y);		
 				
 				if(event.getTrigger().getButton() == MouseEvent.BUTTON1) {
 					if(!isLeftClicked) {

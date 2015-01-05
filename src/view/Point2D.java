@@ -1,4 +1,4 @@
-package model;
+package view;
 
 public class Point2D {
 	public float x;
