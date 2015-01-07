@@ -1,6 +1,7 @@
 package network;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import view.Chart;
 
@@ -12,8 +13,10 @@ public class Network {
 	private ArrayList data;
 	private Chart chart;
 	private Boolean trainMode;
+	private Random random;
 
 	public Network() {
+		random = new Random();
 		this.inputLayer = new Layer(1, LayerType.INPUT,1);
 		this.hiddenLayer = new Layer(20, LayerType.HIDDEN,1);
 		this.outputLayer = new Layer(2, LayerType.OUTPUT,20);
@@ -21,7 +24,7 @@ public class Network {
 		hiddenLayer.setNextLayer(outputLayer);
 		hiddenLayer.setPrevLayer(inputLayer);
 		outputLayer.setPrevLayer(hiddenLayer);
-		data = new ArrayList<double[]>();
+		data = new ArrayList<Double[]>();
 		trainMode = new Boolean(false);
 	}
 	
@@ -37,8 +40,8 @@ public class Network {
 		return trainMode;
 	}
 	
-	public void add(double x, double y1, double y2) {
-		double[] values = new double[3];
+	public void add(Double x, Double y1, Double y2) {
+		Double[] values = new Double[3];
 		values[0] = x;
 		values[1] = y1;
 		values[2] = y2;
@@ -55,7 +58,7 @@ public class Network {
 	public ArrayList<Double[]> getCharts() {
 		ArrayList<Double[]> results = new ArrayList<Double[]>();
 		Double[] result;
-		for(double i = 0.0 ; i <= 1 ; i += 0.1) {
+		for(Double i = 0.0 ; i <= 1 ; i += 0.001) {
 			ArrayList<Double> inputValues = new ArrayList<Double>();
 			inputValues.add(i);
 			ArrayList<Double> outputValues = calculate(inputValues);
@@ -79,17 +82,23 @@ public class Network {
 		return output;
 	}
 	
-	private void train(double x, double y1, double y2) {
-		//System.out.println("train");
-		ArrayList<Double> inputValues = new ArrayList<Double>();
-		inputValues.add(x);
-		ArrayList<Double> outputValues = calculate(inputValues);
-		ArrayList<Double> expectedValues = new ArrayList<Double>();
-		expectedValues.add(y1);
-		expectedValues.add(y2);
-		outputLayer.calculateDelta(expectedValues);
-		hiddenLayer.calculateDelta(expectedValues);
-		outputLayer.updateWeights();
+	private void train(Double x, Double y1, Double y2) {
+		Double aim = 1.0;
+		while(aim > 0.0002) {
+			Double[] values = (Double[])data.get(random.nextInt(data.size()));
+			ArrayList<Double> inputValues = new ArrayList<Double>();
+			inputValues.add(values[0]);
+			ArrayList<Double> outputValues = calculate(inputValues);
+			ArrayList<Double> expectedValues = new ArrayList<Double>();
+			expectedValues.add(values[1]);
+			expectedValues.add(values[2]);
+			outputLayer.calculateDelta(expectedValues);
+			hiddenLayer.calculateDelta(expectedValues);
+			outputLayer.updateWeights();
+			hiddenLayer.updateWeights();
+			aim = outputLayer.calculateAim(expectedValues);
+		}
+		
 	}
 	
 

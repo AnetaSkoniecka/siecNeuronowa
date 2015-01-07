@@ -36,6 +36,16 @@ public class Layer {
 		}
 	}
 	
+	public Double calculateAim(ArrayList<Double> expectedValues) {
+		Double aim = new Double(0.0);
+		for(int i = 0 ; i < expectedValues.size() ; ++i) {
+			aim += (expectedValues.get(i) - neurons.get(i).getValue());
+			aim *= aim;
+		}
+		aim /= 2.0;
+		return aim;
+	}
+	
 	public void updateWeights() {
 		for(Neuron x:neurons)
 			x.updateWeights();

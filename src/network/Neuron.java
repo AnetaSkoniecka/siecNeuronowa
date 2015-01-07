@@ -7,7 +7,7 @@ public class Neuron {
 	private double stimulation;
 	private double activation;
 	private double delta = 0.4;
-	private double learningRatio = 2;
+	private double learningRatio = 0.5;
 
 	public Neuron(Layer lay, int inputs) {
 		this.lay = lay;
