@@ -26,6 +26,7 @@ public class Network {
 		outputLayer.setPrevLayer(hiddenLayer);
 		data = new ArrayList<Double[]>();
 		trainMode = new Boolean(false);
+		System.out.println("hello");
 	}
 	
 	public void setChart(Chart chart) {
@@ -84,7 +85,7 @@ public class Network {
 	
 	private void train(Double x, Double y1, Double y2) {
 		Double aim = 1.0;
-		while(aim > 0.0002) {
+		while(aim > 0.002) {
 			Double[] values = (Double[])data.get(random.nextInt(data.size()));
 			ArrayList<Double> inputValues = new ArrayList<Double>();
 			inputValues.add(values[0]);

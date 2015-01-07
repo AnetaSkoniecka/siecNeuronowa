@@ -8,15 +8,16 @@ public class Neuron {
 	private double[] weights;
 	private double stimulation;
 	private double activation;
-	private double delta = 0.4;
+	private double delta = 0.0;
 	private double learningRatio = 0.5;
 	private Random random;
+	private double bias = 1.0;
 
 	public Neuron(Layer lay, int inputs) {
 		random = new Random();
 		this.lay = lay;
-		weights = new double[inputs];
-		for (int i = 0; i < inputs; ++i)
+		weights = new double[inputs+1];
+		for (int i = 0; i < inputs+1; ++i)
 			if (lay.getType() == LayerType.INPUT)
 				weights[i] = 1;
 			else
@@ -38,11 +39,12 @@ public class Neuron {
 		for (int i = 0; i < lay.getPrevLayer().getNeurons().size(); ++i){
 			sum += lay.getPrevLayer().getNeurons().get(i).getValue()
 					* weights[i];
-//			if(lay.getType() == LayerType.OUTPUT)
+//			if(lay.getType() == LayerType.HIDDEN)
 //				System.out.println(weights[i]);
 		}
+		sum += bias * weights[weights.length-1];
 //		System.out.print("old stimulation " + stimulation + " new ");
-		stimulation = sum;
+		stimulation = sum;if(lay.getType() == LayerType.OUTPUT)System.out.println("suma " + stimulation);
 //		System.out.println(stimulation);
 	}
 	
@@ -53,6 +55,7 @@ public class Neuron {
 		else
 			activation = stimulation;
 //		System.out.println(activation);
+		//if(lay.getType() == LayerType.OUTPUT)System.out.println("activation " + activation);
 	}
 	
 	public void updateWeights() {
@@ -74,6 +77,7 @@ public class Neuron {
 			for (int i = 0; i < lay.getNextLayer().getNeurons().size(); ++i)
 				sum += lay.getNextLayer().getNeurons().get(i).getDelta()
 						* lay.getNextLayer().getNeurons().get(i).getWeights()[lay.getNeurons().indexOf(this)];
+			sum += bias * weights[weights.length-1];
 			delta = ( Math.exp(stimulation) / ((1+Math.exp(stimulation)) * (1+Math.exp(stimulation))))
 					* ( sum );
 		}

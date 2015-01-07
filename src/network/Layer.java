@@ -39,6 +39,7 @@ public class Layer {
 	public Double calculateAim(ArrayList<Double> expectedValues) {
 		Double aim = new Double(0.0);
 		for(int i = 0 ; i < expectedValues.size() ; ++i) {
+			System.out.println("Neuron"+i+": " + neurons.get(i).getValue() );
 			aim += (expectedValues.get(i) - neurons.get(i).getValue());
 			aim *= aim;
 		}
