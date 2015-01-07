@@ -85,10 +85,10 @@ public class Chart {
 	public void setLines(ArrayList<Double[]> points) {
 		series1.clear();
 		series2.clear();
-		System.out.println("////////////////////////");
+		//System.out.println("////////////////////////");
 		for(int i = 0 ; i < points.size(); i++) {
-			series1.add(points.get(i)[0], points.get(i)[1]);System.out.println("x " + points.get(i)[0] + " y1 " + points.get(i)[1]);
-			series2.add(points.get(i)[0], points.get(i)[2]);System.out.println("x " + points.get(i)[0] + " y2 " + points.get(i)[2]);
+			series1.add(points.get(i)[0], points.get(i)[1]);//System.out.println("x " + points.get(i)[0] + " y1 " + points.get(i)[1]);
+			series2.add(points.get(i)[0], points.get(i)[2]);//System.out.println("x " + points.get(i)[0] + " y2 " + points.get(i)[2]);
 		}
 	}
 	

@@ -25,8 +25,10 @@ public class Neuron {
 	}
 
 	public void countValue() {
-		if (lay.getPrevLayer() == null)
+		if (lay.getPrevLayer() == null){
+			System.out.println("To nie powinno sie wyswietlic");
 			return;
+		}
 		countStimulation();
 		countActivation();
 	}
