@@ -1,5 +1,7 @@
 package network;
 
+import java.util.Random;
+
 public class Neuron {
 	
 	private Layer lay;
@@ -8,15 +10,17 @@ public class Neuron {
 	private double activation;
 	private double delta = 0.4;
 	private double learningRatio = 0.5;
+	private Random random;
 
 	public Neuron(Layer lay, int inputs) {
+		random = new Random();
 		this.lay = lay;
 		weights = new double[inputs];
 		for (int i = 0; i < inputs; ++i)
 			if (lay.getType() == LayerType.INPUT)
 				weights[i] = 1;
 			else
-				weights[i] = Math.random() - 0.5;
+				weights[i] = (random.nextDouble() - 0.5)*2.0;
 		
 	}
 
@@ -45,9 +49,9 @@ public class Neuron {
 	
 	public void updateWeights() {
 		for(int i = 0 ; i < weights.length ; i++) {
-			System.out.print("Stara w " + weights[i]);
+			//System.out.print("Stara w " + weights[i]);
 			weights[i] = weights[i] + learningRatio * delta * activation;
-			System.out.println(" nowa w " + weights[i] );
+			//System.out.println(" nowa w " + weights[i] );
 		}
 	}
 	
