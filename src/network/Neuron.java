@@ -44,10 +44,10 @@ public class Neuron {
 	}
 	
 	public void updateWeights() {
-		for(Double w:weights) {
-			System.out.print("Stara w " + w);
-			w = w + learningRatio * delta * activation;
-			System.out.println(" nowa w " + w );
+		for(int i = 0 ; i < weights.length ; i++) {
+			System.out.print("Stara w " + weights[i]);
+			weights[i] = weights[i] + learningRatio * delta * activation;
+			System.out.println(" nowa w " + weights[i] );
 		}
 	}
 	
