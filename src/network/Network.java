@@ -97,6 +97,7 @@ public class Network {
 			outputLayer.updateWeights();
 			hiddenLayer.updateWeights();
 			aim = outputLayer.calculateAim(expectedValues);
+			System.out.println("Aim " + aim);
 		}
 		
 	}

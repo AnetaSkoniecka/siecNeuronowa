@@ -25,7 +25,7 @@ public class Panel extends ChartPanel {
 		this.parent = parent;
 		this.panel = this;
 		this.setPopupMenu(null);
-		this.setMouseZoomable(false);
+		//this.setMouseZoomable(false);
 		addListener();	
 	}
 	

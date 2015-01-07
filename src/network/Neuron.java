@@ -35,9 +35,12 @@ public class Neuron {
 	
 	private void countStimulation() {
 		double sum = 0;
-		for (int i = 0; i < lay.getPrevLayer().getNeurons().size(); ++i)
+		for (int i = 0; i < lay.getPrevLayer().getNeurons().size(); ++i){
 			sum += lay.getPrevLayer().getNeurons().get(i).getValue()
 					* weights[i];
+//			if(lay.getType() == LayerType.OUTPUT)
+//				System.out.println(weights[i]);
+		}
 //		System.out.print("old stimulation " + stimulation + " new ");
 		stimulation = sum;
 //		System.out.println(stimulation);
@@ -45,7 +48,10 @@ public class Neuron {
 	
 	private void countActivation() {
 //		System.out.print("old activation " + activation + " new ");
-		activation = Math.exp(stimulation) / (1 + Math.exp(stimulation));
+		if(lay.getType() == LayerType.OUTPUT)
+			activation = Math.exp(stimulation) / (1 + Math.exp(stimulation));
+		else
+			activation = stimulation;
 //		System.out.println(activation);
 	}
 	
@@ -68,7 +74,7 @@ public class Neuron {
 			for (int i = 0; i < lay.getNextLayer().getNeurons().size(); ++i)
 				sum += lay.getNextLayer().getNeurons().get(i).getDelta()
 						* lay.getNextLayer().getNeurons().get(i).getWeights()[lay.getNeurons().indexOf(this)];
-			delta = ( Math.exp(stimulation) / (1+Math.exp(stimulation)) / (1+Math.exp(stimulation)) )
+			delta = ( Math.exp(stimulation) / ((1+Math.exp(stimulation)) * (1+Math.exp(stimulation))))
 					* ( sum );
 		}
 		else
